@@ -33,6 +33,8 @@ const DialogueButtonContainer = styled.div`
 const DialogueButton = styled.button`
   border: none;
   background: ${({ color }) => (color ? `${color}` : "#304859")};
+  background: ${({ activeButton }) => !activeButton && "#BCCED9"};
+  background: ${({ startButton }) => startButton && "#FDA214"};
   margin-top: ${({ startButton }) => (startButton ? "32px" : "")};
   width: 100%;
   color: #fcfcfc;
@@ -42,7 +44,27 @@ const DialogueButton = styled.button`
 `;
 
 const StartGame = () => {
-  // const [theme, setTheme] = useState;
+  const [active, setActive] = useState("Numbers");
+  const [numberOfPlayers, setNumberOfPlayers] = useState("1");
+  const [gridSize, setGridSize] = useState("4x4");
+
+  const changeTheme = (event) => {
+    setActive(event.target.innerText);
+  };
+
+  const changeNumberOfPlayers = (event) => {
+    setNumberOfPlayers(event.target.innerText);
+  };
+
+  const changeGridSize = (event) => {
+    setGridSize(event.target.innerText);
+  };
+
+  const startGame = () => {
+    console.log(
+      `Start the game with the ${active} theme, ${numberOfPlayers} players and ${gridSize} grid size!`
+    );
+  };
 
   return (
     <StartGameContainer>
@@ -52,22 +74,62 @@ const StartGame = () => {
       <StartGameDialogue>
         <DialogueHeader>Select Theme</DialogueHeader>
         <DialogueButtonContainer>
-          <DialogueButton>Numbers</DialogueButton>
-          <DialogueButton>Icons</DialogueButton>
+          <DialogueButton
+            onClick={changeTheme}
+            activeButton={active === "Numbers"}
+          >
+            Numbers
+          </DialogueButton>
+          <DialogueButton
+            onClick={changeTheme}
+            activeButton={active === "Icons"}
+          >
+            Icons
+          </DialogueButton>
         </DialogueButtonContainer>
         <DialogueHeader>Number of Players</DialogueHeader>
         <DialogueButtonContainer>
-          <DialogueButton>1</DialogueButton>
-          <DialogueButton>2</DialogueButton>
-          <DialogueButton>3</DialogueButton>
-          <DialogueButton>4</DialogueButton>
+          <DialogueButton
+            onClick={changeNumberOfPlayers}
+            activeButton={numberOfPlayers === "1"}
+          >
+            1
+          </DialogueButton>
+          <DialogueButton
+            onClick={changeNumberOfPlayers}
+            activeButton={numberOfPlayers === "2"}
+          >
+            2
+          </DialogueButton>
+          <DialogueButton
+            onClick={changeNumberOfPlayers}
+            activeButton={numberOfPlayers === "3"}
+          >
+            3
+          </DialogueButton>
+          <DialogueButton
+            onClick={changeNumberOfPlayers}
+            activeButton={numberOfPlayers === "4"}
+          >
+            4
+          </DialogueButton>
         </DialogueButtonContainer>
         <DialogueHeader>Grid Size</DialogueHeader>
         <DialogueButtonContainer>
-          <DialogueButton>4x4</DialogueButton>
-          <DialogueButton>6x6</DialogueButton>
+          <DialogueButton
+            onClick={changeGridSize}
+            activeButton={gridSize === "4x4"}
+          >
+            4x4
+          </DialogueButton>
+          <DialogueButton
+            onClick={changeGridSize}
+            activeButton={gridSize === "6x6"}
+          >
+            6x6
+          </DialogueButton>
         </DialogueButtonContainer>
-        <DialogueButton color="#FDA214" startButton>
+        <DialogueButton onClick={startGame} startButton>
           Start Game
         </DialogueButton>
       </StartGameDialogue>
