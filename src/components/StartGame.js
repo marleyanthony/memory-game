@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../src/assets/logo.svg";
 
@@ -22,7 +23,6 @@ const DialogueHeader = styled.p`
   font-size: 15px;
   color: #7191a5;
   margin-bottom: 11px;
-  /* margin: 0; */
 `;
 
 const DialogueButtonContainer = styled.div`
@@ -129,9 +129,11 @@ const StartGame = () => {
             6x6
           </DialogueButton>
         </DialogueButtonContainer>
-        <DialogueButton onClick={startGame} startButton>
-          Start Game
-        </DialogueButton>
+        <Link to="/four-by-four">
+          <DialogueButton onClick={startGame} startButton>
+            Start Game
+          </DialogueButton>
+        </Link>
       </StartGameDialogue>
     </StartGameContainer>
   );
